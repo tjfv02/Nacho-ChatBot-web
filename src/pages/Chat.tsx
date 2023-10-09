@@ -5,12 +5,33 @@ import SendIcon from "@mui/icons-material/Send";
 import MessageComponent from "../components/Message";
 import { Box, Container, Paper } from "@mui/material";
 import { Message } from "../interfaces/interfaces";
-import UserAvatar from "../components/UserAvatar";
-import ProfilePhoto from "../assets/profile.png";
+import NachoResponses from "../components/NachoResponses";
 
+const exampleMessages = [
+  {
+    text: "Hola, ¿cómo estás?",
+    timestamp: new Date(),
+    isUser: true, 
+  },
+  {
+    text: "¡Hola! Estoy bien, ¿y tú?",
+    timestamp: new Date(),
+    isUser: false, 
+  },
+  {
+    text: "Me alegro de escucharlo.",
+    timestamp: new Date(),
+    isUser: true, 
+  },
+  {
+    text: "Sí, gracias.",
+    timestamp: new Date(),
+    isUser: false, 
+  },
+];
 
 const Chat: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(exampleMessages);
   const [inputText, setInputText] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +44,7 @@ const Chat: React.FC = () => {
     const newMessage: Message = {
       text: inputText,
       timestamp: new Date(),
-      isUser: true, // Change to false if the message is from the other user
+      isUser: true, 
     };
 
     setMessages([...messages, newMessage]);
@@ -37,18 +58,35 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <Container style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <Paper elevation={3}  style={{ padding: "16px" }}>
+    <Container
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 10,
+      }}
+    >
+      <Paper elevation={3} style={{ padding: "16px" }}>
         <Box display="flex" flexDirection="column" height="70vh" width="130vh">
           <div style={{ flex: 1, overflowY: "scroll" }}>
             {messages.map((message, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                {message.isUser ? (
-                  <UserAvatar imageUrl={ProfilePhoto} altText="Nombre de Usuario" />
-                ) : null}
-                <MessageComponent message={message.text} isUser={message.isUser} timestamp={message.timestamp}/>
+              <div
+                key={index}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 {!message.isUser ? (
-                  <UserAvatar imageUrl={ProfilePhoto} altText="Nombre de Usuario" />
+                  <NachoResponses
+                    message={message.text}
+                    timestamp={message.timestamp.toLocaleTimeString()} // Formatea la marca de tiempo como prefieras
+                  />
+                ) : null}
+                {message.isUser ? (
+                  <>
+                    <MessageComponent
+                      message={message.text}
+                      timestamp={message.timestamp}
+                    />
+                  </>
                 ) : null}
               </div>
             ))}

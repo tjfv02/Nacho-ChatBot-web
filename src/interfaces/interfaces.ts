@@ -6,11 +6,15 @@ export interface Message {
 
 export interface MessageProps {
   message: string;
-  isUser: boolean;
   timestamp: Date;
 }
 
 export interface UserAvatarProps {
-    imageUrl: string;
-    altText: string;
-  }
+  imageUrl: string;
+  altText: string;
+}
+
+export interface NachoResponsesProps {
+  message: string;
+  timestamp: string;
+}

@@ -1,10 +1,14 @@
-import React from 'react';
-import { MessageProps } from '../interfaces/interfaces';
-import { Avatar, Typography } from '@mui/material';
-import ProfilePhoto from "../assets/profile.png";
+import React from "react";
+import { Avatar, Typography } from "@mui/material";
+import nachoPhoto from "../assets/nacho.jpg";
+import { NachoResponsesProps } from "../interfaces/interfaces";
 
 
-const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
+
+const NachoResponses: React.FC<NachoResponsesProps> = ({
+  message,
+  timestamp,
+}) => {
   const messageContainerStyle: React.CSSProperties = {
     display: "flex",
     alignItems: "center",
@@ -16,27 +20,27 @@ const Message: React.FC<MessageProps> = ({ message, timestamp }) => {
   };
 
   const messageTextStyle: React.CSSProperties = {
-    backgroundColor: "#2196F3",
-    color: "#FFFFFF",
+    backgroundColor: "#f5f5f5",
     padding: "8px", // Puedes ajustar el relleno según tus preferencias
     borderRadius: "8px", // Puedes ajustar el radio de borde según tus preferencias
   };
 
-  const senderName = 'Tú';
+  const senderName = 'Nacho';
+
   return (
     <div style={messageContainerStyle}>
-      <Avatar src={ProfilePhoto} alt={senderName} style={avatarStyle} />
+      <Avatar src={nachoPhoto} alt={senderName} style={avatarStyle} />
       <div>
         <Typography variant="subtitle2" color="textSecondary">
           {senderName}
         </Typography>
         <Typography style={messageTextStyle}>{message}</Typography>
         <Typography variant="caption" color="textSecondary">
-        {timestamp.toLocaleTimeString()}
+          {timestamp}
         </Typography>
       </div>
     </div>
   );
 };
 
-export default Message;
+export default NachoResponses;
